@@ -11,7 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "@replit/database": "^2.0.1",
+    "async": "^3.2.3",
+    "cors": "^2.8.5",
+    "crc-32": "^1.2.2",
     "express": "^4.17.2",
+    "profanity-cleanser": "^1.0.1",
+    "regexcensor": "^1.0.4",
     "simple-json-db": "^2.0.0"
   }
 }
