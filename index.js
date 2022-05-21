@@ -54,6 +54,7 @@ app.post('/post/setMsg', (req, res) => {
   const { data } = req.body;
   const { id } = req.body;
   const { username } = req.body;
+  console.log(username);
   let result;
   console.log(JSON.stringify(req.body));
 
@@ -61,9 +62,15 @@ app.post('/post/setMsg', (req, res) => {
   console.log(idVerifyResult);
   let filteredData = cleanser.replace(data);
   //XSS check
-  filteredData = filteredData.replace(new RegExp('<script>', "g"), "");
-  filteredData = filteredData.replace(new RegExp('<a', "g"), "");
-  filteredData = filteredData.replace(new RegExp('&', "g"), "&#38;");
+  filteredData = filteredData.replace(new RegExp('<script', "gi"), "");
+  filteredData = filteredData.replace(new RegExp('document.cookie', "g"), "");
+  filteredData = filteredData.replace(new RegExp('<br>', "gi"), "");
+  filteredData = filteredData.replace(new RegExp('<a', "gi"), "");
+  filteredData = filteredData.replace(new RegExp('<meta', "gi"), "");
+  filteredData = filteredData.replace(new RegExp('javascript:', "gi"), "");
+  filteredData = filteredData.replace(new RegExp('<iframe>', "gi"), "");
+  filteredData = filteredData.replace(new RegExp('<link>', "gi"), "");
+  filteredData = filteredData.replace(new RegExp('onerror=', "gi"), "");
 
   if(idVerifyResult == true) {
     db.set('msg', filteredData);

@@ -26,7 +26,7 @@ function getId(username) {
   var ids = fs.readFileSync("./storage/ids.txt").toString();
   var splitIds = ids.split('|');
   console.log(splitIds);
-  const index = binarySearch(splitIds, username);
+  let index = splitIds.indexOf(username);
   console.log(index);
   let finalID = index - 1;
   return splitIds[finalID];
@@ -35,7 +35,7 @@ function getId(username) {
 function checkBan(id) {
   var ids = fs.readFileSync("./storage/bannedIDs.txt").toString();
   var splitIds = ids.split('|');
-  const index = binarySearch(splitIds, id);
+  let index = splitIds.indexOf(id);
   if(index == -1) {
     return false;
   } else {
@@ -60,7 +60,7 @@ function checkBan(id) {
   let isBanned = checkBan(id);
   console.log(isBanned);
 
-  if(verifyUser == id && !isBanned) {
+  if(verifyUser == id && isBanned == false) {
     return true;
   } else {
     return false;
